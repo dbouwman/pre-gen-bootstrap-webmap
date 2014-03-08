@@ -42,8 +42,9 @@ module.exports = function(grunt) {
     
     'gh-pages':{
       options: {
-        base: '/'
-      }
+        base: './'
+      },
+      src:['**']
     },
 
 
@@ -100,6 +101,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask("deploy", [
     'gh-pages'
+    
   ]); 
 
 };
