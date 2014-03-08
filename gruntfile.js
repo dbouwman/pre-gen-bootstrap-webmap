@@ -42,8 +42,10 @@ module.exports = function(grunt) {
     
     'gh-pages':{
       options: {
-        base: '/'
-      }
+        base: './',
+        message: 'Auto-generated commit by gh-pages'
+      },
+      src:['./js/**/*.js','./css/**/.css','./**/*.html']
     },
 
 
@@ -100,6 +102,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask("deploy", [
     'gh-pages'
+    
   ]); 
 
 };
