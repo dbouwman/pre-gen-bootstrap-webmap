@@ -18,6 +18,17 @@ define(["esri/map", "esri/dijit/Popup", "dojo/_base/declare", "dojo/on", "dojo/d
           return mapOut;
         }
       },
+      clearBaseMap: function(map){
+        if(map.basemapLayerIds.length > 0){
+          dojo.forEach(map.basemapLayerIds, function(lid){
+            console.log('removing ' + lid);
+            map.removeLayer(map.getLayer(lid));
+          });
+          map.basemapLayerIds = [];
+        }else{
+          map.removeLayer(map.getLayer(map.layerIds[0]));
+        }
+      },
       destroy: function(map) {
         function _disconnect(resizer) {
           if (resizer._handles) {
