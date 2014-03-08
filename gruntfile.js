@@ -78,11 +78,10 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-bower-task');
-  grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-open');
-
+  grunt.loadNpmTasks('grunt-gh-pages');
   grunt.registerTask('default', ['watch']);
 
   grunt.registerTask('default', [
