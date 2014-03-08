@@ -12,9 +12,6 @@
     <!-- Bootstrap core CSS -->
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 
-
-  
-
     <!-- Bootstrap-map-js -->
     <link rel="stylesheet" type="text/css" href="http://js.arcgis.com/3.7/js/esri/css/esri.css">   
     <link rel="stylesheet" type="text/css" href="./css/bootstrapmap.css">   
@@ -47,6 +44,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Basemaps <b class="caret"></b></a>
               <ul class="dropdown-menu" id="myDropdown">
                 <li><a href="#">Streets</a></li>
+                <li><a href="#">MapBox Space</a></li>
+                <li><a href="#">Water Color</a></li>
+                <li><a href="#">Pinterest</a></li>
                 <li><a href="#">Imagery</a></li>
                 <li><a href="#">National Geographic</a></li>
                 <li><a href="#">Topographic</a></li>
@@ -67,13 +67,19 @@
 
     <script src="http://js.arcgis.com/3.7compact"></script>
     <script>
-        require(["esri/map", "esri/dijit/Scalebar", "./js/bootstrapmap.js", "dojo/domReady!"], 
-          function(Map, Scalebar, BootstrapMap) {
+
+        require([
+          "esri/map", 
+          "esri/dijit/Scalebar",
+          "esri/layers/WebTiledLayer",
+          "./js/bootstrapmap.js", 
+          "dojo/domReady!"], 
+          function(Map, Scalebar, WebTiledLayer, BootstrapMap) {
             <!-- Get a reference to the ArcGIS Map class -->
             var map = BootstrapMap.create("mapDiv",{
-              basemap:"national-geographic",
-              center:[-122.45,37.77],
-              zoom:12
+              basemap:'gray',
+              center:[-117.1,33.6],
+              zoom:9
             });
 
             var scalebar = new Scalebar({
@@ -83,7 +89,44 @@
 
            $(document).ready(function(){
               $("#basemapList li").click(function(e) {
+                var l, options;
+                BootstrapMap.clearBaseMap(map);
                 switch (e.target.text) {
+                  case "Water Color":
+                    
+                   
+                   options = {
+                      id:'Water Color',
+                      copyright: 'stamen',
+                      resampling: true,
+                      subDomains: ['a','b','c','d']
+                    };
+                    l = new WebTiledLayer('http://${subDomain}.tile.stamen.com/watercolor/${level}/${col}/${row}.jpg',options);
+                    map.addLayer(l);
+                    break;
+
+                  case "MapBox Space":
+                    
+                    options = {
+                      id:'mapbox-space',
+                      copyright: 'MapBox',
+                      resampling: true,
+                      subDomains: ['a','b','c','d']
+                    };
+                    l = new WebTiledLayer('http://${subDomain}.tiles.mapbox.com/v3/eleanor.ipncow29/${level}/${col}/${row}.jpg',options);
+                    map.addLayer(l);
+                    break;
+
+                  case "Pinterest":
+                    options = {
+                      id:'mapbox-pinterest',
+                      copyright: 'Pinterest/MapBox',
+                      resampling: true,
+                      subDomains: ['a','b','c','d']
+                    };
+                    l = new WebTiledLayer('http://${subDomain}.tiles.mapbox.com/v3/pinterest.map-ho21rkos/${level}/${col}/${row}.jpg',options);
+                    map.addLayer(l);
+                    break;
                   case "Streets":
                     map.setBasemap("streets");
                     break;
