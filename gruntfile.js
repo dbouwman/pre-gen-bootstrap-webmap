@@ -43,9 +43,12 @@ module.exports = function(grunt) {
     'gh-pages':{
       options: {
         base: './',
-        message: 'Auto-generated commit by gh-pages'
+        message: 'Auto-generated commit by grunt-gh-pages'
       },
-      src:['./js/**/*.js','./css/**/.css','./**/*.html']
+      src:['./js/**/*.js',
+          './*.html',
+          './css/**/*.css'
+        ]
     },
 
 
@@ -72,7 +75,7 @@ module.exports = function(grunt) {
         },
         files:[
           './js/**/*.js',
-          './**/*.html',
+          './*.html',
           './css/**/*.css'
         ]
       }
